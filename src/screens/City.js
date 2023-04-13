@@ -7,32 +7,56 @@ import {
   StyleSheet,
   View
 } from 'react-native';
-import { Feather, FontAwesome } from '@expo/vector-icons';
+import IconText from '../components/IconText';
 
 const City = () => {
+  const { 
+    cityTextStyle, 
+    cityName, 
+    countryName, 
+    imageLayout, 
+    populationWrapper, 
+    populationText,
+    riseSetWrapper,
+    riseSetText,
+    rowLayOut,
+
+  } = styles
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
         source={require('../../assets/HH.jpg')}
-        style={styles.imageLayout}
+        style={imageLayout}
       >
         { /*
          * merging styles using the spread syntax 
-         * For example any common properties between [ CityTextStyle and cityName ]
+         * For example any common properties between [ cityTextStyle and cityName ]
          * will be overridden by the properties from cityName
          */}
 
-        <Text style={[styles.CityTextStyle, styles.cityName]}>Hamburg</Text>
-        <Text style={[styles.CityTextStyle, styles.countryName]}>Deutschland</Text>
-        <View style={styles.populationWrapper}>
-          <FontAwesome name="user" size={50} color="#00ced1" />
-          <Text style={styles.populationText}>10,000</Text>
+        <Text style={[cityTextStyle, cityName]}>Hamburg</Text>
+        <Text style={[cityTextStyle, countryName]}>Deutschland</Text>
+        <View style={[populationWrapper, rowLayOut]}>
+          <IconText 
+            iconName={"user"}
+            iconColor={"#00ced1"}
+            bodyText={"10000"}
+            bodyTextStyles={populationText}
+          />
         </View>
-        <View style={styles.riseSetWrapper}>
-          <Feather name="sunrise" size={50} color="#e0ffff" />
-          <Text style={styles.riseSetText}>07:45:07am</Text>
-          <Feather name="sunset" size={50} color="#e0ffff" />
-          <Text style={styles.riseSetText}>20:15:00pm</Text>
+        <View style={[riseSetWrapper, rowLayOut]}>
+        <IconText 
+            iconName={"sunrise"}
+            iconColor={"#e0ffff"}
+            bodyText={"07:45:07am"}
+            bodyTextStyles={riseSetText}
+          />
+          <IconText 
+            iconName={"sunset"}
+            iconColor={"#e0ffff"}
+            bodyText={"20:15:00pm"}
+            bodyTextStyles={riseSetText}
+          />
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -50,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  CityTextStyle: {
+  cityTextStyle: {
     justifyContent: 'center',
     alignSelf: 'center',
     fontWeight: 'bold',
@@ -69,8 +93,6 @@ const styles = StyleSheet.create({
   },
 
   populationWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30
   },
@@ -79,12 +101,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginLeft: 7.5,
     color: '#00ced1',
-    fontWeight: 'bold'
   },
 
   riseSetWrapper: {
-    flexDirection: 'row',
-    alignItems:'center',
     justifyContent: 'space-around',
     marginTop: 30
   },
@@ -92,9 +111,13 @@ const styles = StyleSheet.create({
   riseSetText: {
     fontSize: 20,
     color: 'whitesmoke',
-    fontWeight: 12
-  }
+  },
 
+  // shared styles for populationWrapper & riseSetWrapper
+  rowLayOut: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 })
 
 export default City;
