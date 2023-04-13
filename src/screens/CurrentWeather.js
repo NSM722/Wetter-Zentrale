@@ -5,25 +5,44 @@ import {
   StyleSheet,
   View
 } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Feather } from '@expo/vector-icons'; 
+import RowText from '../components/RowText';
 
 
 const CurrentWeather = () => {
+  const { 
+    bodyWrapper, 
+    container, 
+    description, 
+    feels, 
+    highLow, 
+    highLowWrapper, 
+    message, 
+    temp, 
+    wrapper 
+  } = styles
+  
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.container}>
-        <Ionicons name="rainy-sharp" size={100} color="black" />
-        <Text style={styles.description}>It's rainy</Text>
-        <Text style={styles.temp}>Temp: 10</Text>
-        <Text style={styles.feels}>Feels Like: 7</Text>
-        <View style={styles.highLowWrapper}>
-         <Text style={styles.highLow}>High: 12</Text>
-         <Text style={styles.highLow}>Low:5 </Text>
-        </View>
+    <SafeAreaView style={wrapper}>
+      <View style={container}>
+        <Feather name="cloud-rain" size={100} color="black" />
+        <Text style={temp}>Temp: 10</Text>
+        <Text style={feels}>Feels Like: 7</Text>
+        <RowText 
+          containerStyles={highLowWrapper}
+          messageOne={"High: 12"}
+          messageOneStyles={highLow}
+          messageTwo={"Low:5"}
+          messageTwoStyles={highLow} 
+        />
       </View>
-      <View style={styles.bodyWrapper}>
-        <Text style={styles.message}>Carry an Umbrella & wear a rain jacket</Text>
-      </View>
+      <RowText 
+        containerStyles={bodyWrapper}
+        messageOne={"It's rainy"}
+        messageOneStyles={description}
+        messageTwo={"Carry an Umbrella & wear a rain jacket"}
+        messageTwoStyles={message}
+      />
     </SafeAreaView>
   )
 }
