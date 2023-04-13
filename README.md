@@ -1,6 +1,12 @@
-Get started with [Expo dev docs](https://expo.dev/) and [React Native dev docs](https://reactnative.dev/)
+# Wetter Zentrale
+
+A Responsive IOS and Android mobile application that fetches weather data from [OpenWeatherMap API](https://openweathermap.org/)
+
+The app provides a user-friendly interface and easy navigation to switch between screens to get weather updates quickly
 
 ## Setting the App with Expo Go Quick Start
+
+Get started with [Expo dev docs](https://expo.dev/) and [React Native dev docs](https://reactnative.dev/)
 
 ```
 npx create-expo-app YourAppName
@@ -13,9 +19,7 @@ npm start
 
 Scan the QR Code and open via the Expo Go App
 
-## Dependencies
-
-**Install a Linter**
+## Install a Linter
 
 Since the app is set up using `Expo`, it doesn't have a linter
 
@@ -112,13 +116,14 @@ module.exports = {
  npm run lint
 ```
 
-Create directories & files
+**Create directories & files**
 
 ```
 src/components
+src/screens
 ```
 
-## UI GOALS
+## UI Display Goals
 
 - Temperature
 - Feels like
@@ -128,7 +133,7 @@ src/components
   - Additional text
   - Icon & Background Color
 
-## DYNAMIC SCREENS
+## Dynamic Screens
 
 - Upcoming Weather
 - Current Weather
@@ -189,3 +194,125 @@ import { Feather } from "@expo/vector-icons";
 // Render the component
 <Feather name="sun" size={24} color="black" />;
 ```
+
+## Routing and Navigation
+
+Getting started with [React Navigation](https://reactnavigation.org/docs/getting-started/ "Read Docs") or checkout the [React Navigation Github Repo](https://github.com/react-navigation/react-navigation "Read More")
+
+### Installation and Setup
+
+```
+npm install @react-navigation/native
+```
+
+### Installing dependencies into an Expo managed project
+
+```
+npx expo install react-native-screens react-native-safe-area-context
+```
+
+### Setting up the NavigationContainer
+
+Wrap the whole app in `NavigationContainer`
+
+Usually this is done in your entry file, such as index.js or App.js
+
+```js
+import { NavigationContainer } from "@react-navigation/native";
+
+export default function App() {
+  return (
+    <NavigationContainer>{/* Rest of your app code */}</NavigationContainer>
+  );
+}
+```
+
+### Setting up Tab(**_bottom Tabs_**) navigation
+
+```
+npm install @react-navigation/bottom-tabs
+```
+
+Read more on the [API Definition](https://reactnavigation.org/docs/bottom-tab-navigator/#api-definition "Read Docs")
+
+The `Tab.Navigator` component is used to define the screens that will be displayed in the tab bar, using the `Tab.Screen`
+
+```js
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name={"Current"} component={CurrentWeather} />
+        <Tab.Screen name={"Upcoming"} component={UpcomingWeather} />
+        <Tab.Screen name={"City"} component={City} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
+```
+
+### Customizing the Tab Navigation appearance
+
+The `screenOptions` prop in a `Tab.Navigator` component is an object that allows you to define common options for all screens in the navigator
+
+It is used to specify options for the tab bar appearance such as:
+
+- the active and inactive colors
+- icon styles
+- label styles
+
+It can also be used to set options for the header that appears at the top of each screen
+
+**tabBarIcon**
+
+Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar
+
+```js
+<Tab.Screen
+  name={"Current"}
+  component={CurrentWeather}
+  options={{
+    tabBarIcon: ({ focused }) => (
+      <Ionicons
+        name={"today"}
+        size={25}
+        color={focused ? "#dc143c" : "#000000"}
+      />
+    ),
+  }}
+/>
+```
+
+**tabBarStyle**
+Style object for the bottom tab bar, one can configure styles such as:
+
+- **backgroundColor**: The background color of the tab bar
+- **paddingVertical**: The vertical padding of the tab bar
+- **height**: The height of the tab bar
+- **borderTopWidth**: The width of the top border of the tab bar
+- **borderTopColor**: The color of the top border of the tab bar
+- **elevation**: The elevation of the tab bar
+
+```js
+<Tab.Navigator
+  screenOptions={{
+    tabBarActiveTintColor: '#dc143c',
+    tabBarInactiveTintColor: '#000000',
+    tabBarStyle: {
+      backgroundColor: '#20b2aa',
+    },
+
+    // styling the header bar
+    headerStyle: {
+      backgroundColor: '#20b2aa',
+    },
+    headerTitleStyle : {
+      fontWeight: 'bold',
+      fontSize: 25,
+      color: '#fff0f5'
+    }
+  }}
+>
+```
+
+Additional details on [configuring the header bar](https://reactnavigation.org/docs/headers/ "Read Docs")
