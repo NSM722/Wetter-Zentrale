@@ -316,3 +316,19 @@ Style object for the bottom tab bar, one can configure styles such as:
 ```
 
 Additional details on [configuring the header bar](https://reactnavigation.org/docs/headers/ "Read Docs")
+
+### Expo Location
+
+When making the API call one needs the latitude and longitude coordinates
+
+```json
+api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+```
+
+[`expo-location`](https://docs.expo.dev/versions/latest/sdk/location/ "Read Docs") allows reading geolocation information from the device
+
+Your app can poll for the current location or subscribe to location update events
+
+### react-native-dotenv package
+
+[react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv "Github Repo") is used for loading react native environment variables using import statements for multiple env files
