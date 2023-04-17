@@ -381,3 +381,20 @@ export const useGetWeather = () => {
   return { isLoading, errorMsg, weather };
 };
 ```
+
+### Moments.js library
+
+[This library](https://momentjs.com/ "Read Docs") is useful for parsing, validating, manipulating & displaying dates and times in Javascript
+
+```js
+npm install moment --save
+```
+
+In this project its used to manipulate the display of the day(s) text and time
+
+```js
+<View style={styles.dateTextWrapper}>
+  <Text style={date}>{moment(dt_txt).for("dddd")}</Text>
+  <Text style={date}>{moment(dt_txt).for("h:mm:ss a")}</Text>
+</View>
+```

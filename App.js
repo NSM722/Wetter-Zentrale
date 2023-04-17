@@ -9,7 +9,7 @@ const App = () => {
   console.log({isLoading}, {errorMsg}, {weather})
 
   return (
-    isLoading ? 
+    !weather && !weather.list ? 
     <View style={styles.container}>
       <ActivityIndicator 
         size={'large'}
@@ -17,7 +17,7 @@ const App = () => {
       />
     </View> :
     <NavigationContainer>
-      <Tabs />
+      <Tabs weather={weather}/>
     </NavigationContainer>
   )
 }
