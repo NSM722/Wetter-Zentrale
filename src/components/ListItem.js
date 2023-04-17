@@ -13,7 +13,7 @@ const ListItem = (props) => {
 
   return (
     <View style={listItem}>
-      <Ionicons name={weatherType[weather_condition].icon} size={50} color={"white"} />
+      <Ionicons name={weatherType[weather_condition]?.icon} size={50} color={"white"} />
       <View style={styles.dateTextWrapper}>
         <Text style={date}>{moment(dt_txt).format('dddd')}</Text>
         <Text style={date}>{moment(dt_txt).format('h:mm:ss a')}</Text>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderWidth: 2,
-    backgroundColor: '#dda0dd'
+    backgroundColor: '#dda0dd' // change bgColor
   },
 
   temp: {
